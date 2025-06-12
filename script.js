@@ -27,24 +27,44 @@ function getHumanChoice() {
 function playRound(humanChoice, computerChoice) {
   humanChoice = humanChoice.toLowerCase();
 
+  const roundResult = document.getElementById("round-result");
+  const scoreDisplay = document.getElementById("score");
+
   if (humanChoice === computerChoice) {
-    console.log("It's a tie!");
-    return;
-  }
-
-  const winConditions = {
-    rock: "scissors",
-    paper: "rock",
-    scissors: "paper",
-  };
-
-  if (winConditions[humanChoice] === computerChoice) {
-    humanScore++;
-    console.log(`You win! ${humanChoice} beats ${computerChoice}`);
+    roundResult.textContent = "It's a tie!";
   } else {
-    computerScore++;
-    console.log(`You lose! ${computerChoice} beats ${humanChoice}`);
+    const winConditions = {
+      rock: "scissors",
+      paper: "rock",
+      scissors: "paper",
+    };
+
+    if (winConditions[humanChoice] === computerChoice) {
+      humanScore++;
+      roundResult.textContent = `You win! ${humanChoice} beats ${computerChoice}`;
+    } else {
+      computerScore++;
+      roundResult.textContent = `You lose! ${computerChoice} beats ${humanChoice}`;
+    }
   }
+
+  // Update score display
+  scoreDisplay.textContent = `Human: ${humanScore} | Computer: ${computerScore}`;
+
+}
+
+// Stop the game at 5 points
+if (humanScore === 5 || computerScore === 5) {
+  const winnerMessage =
+    humanScore === 5
+      ? "🏆 You won the game!"
+      : "💻 Computer won the game!";
+  roundResult.textContent = winnerMessage;
+
+  // Disable all buttons
+  document.getElementById("rock").disabled = true;
+  document.getElementById("paper").disabled = true;
+  document.getElementById("scissors").disabled = true;
 }
 
 /*
@@ -77,3 +97,19 @@ function playGame() {
 playGame();
 ?
 */
+
+// Button event listeners
+document.getElementById("rock").addEventListener("click", () => {
+  const computerSelection = getComputerChoice();
+  playRound("rock", computerSelection);
+});
+
+document.getElementById("paper").addEventListener("click", () => {
+  const computerSelection = getComputerChoice();
+  playRound("paper", computerSelection);
+});
+
+document.getElementById("scissors").addEventListener("click", () => {
+  const computerSelection = getComputerChoice();
+  playRound("scissors", computerSelection);
+});
