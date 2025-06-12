@@ -16,13 +16,15 @@ function getComputerChoice() {
 }
 
 
+/*
 function getHumanChoice() {
   const userInput = prompt("Enter rock, paper, or scissors:");
   return userInput;
 }
+*/
+
 
 function playRound(humanChoice, computerChoice) {
-  // Convert humanChoice to lowercase to make it case-insensitive
   humanChoice = humanChoice.toLowerCase();
 
   if (humanChoice === computerChoice) {
@@ -45,6 +47,7 @@ function playRound(humanChoice, computerChoice) {
   }
 }
 
+/*
 function playGame() {
   humanScore = 0;
   computerScore = 0;
@@ -72,3 +75,5 @@ function playGame() {
 }
 
 playGame();
+?
+*/
