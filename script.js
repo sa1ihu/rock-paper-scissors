@@ -1,11 +1,10 @@
 let humanScore = 0;
 let computerScore = 0;
 
-
-
+// Generates a random choice for the computer: "rock", "paper", or "scissors"
 function getComputerChoice() {
   const randomNum = Math.random();
-  
+
   if (randomNum < 1 / 3) {
     return "rock";
   } else if (randomNum < 2 / 3) {
@@ -15,15 +14,15 @@ function getComputerChoice() {
   }
 }
 
-
 /*
+// Gets the player's choice via prompt (no longer used in UI version)
 function getHumanChoice() {
   const userInput = prompt("Enter rock, paper, or scissors:");
   return userInput;
 }
 */
 
-
+// Handles a single round of the game and updates the DOM with the result
 function playRound(humanChoice, computerChoice) {
   humanChoice = humanChoice.toLowerCase();
 
@@ -51,23 +50,23 @@ function playRound(humanChoice, computerChoice) {
   // Update score display
   scoreDisplay.textContent = `Human: ${humanScore} | Computer: ${computerScore}`;
 
-}
+  // Stop the game at 5 points
+  if (humanScore === 5 || computerScore === 5) {
+    const winnerMessage =
+      humanScore === 5
+        ? "🏆 You won the game!"
+        : "💻 Computer won the game!";
+    roundResult.textContent = winnerMessage;
 
-// Stop the game at 5 points
-if (humanScore === 5 || computerScore === 5) {
-  const winnerMessage =
-    humanScore === 5
-      ? "🏆 You won the game!"
-      : "💻 Computer won the game!";
-  roundResult.textContent = winnerMessage;
-
-  // Disable all buttons
-  document.getElementById("rock").disabled = true;
-  document.getElementById("paper").disabled = true;
-  document.getElementById("scissors").disabled = true;
+    // Disable all buttons
+    document.getElementById("rock").disabled = true;
+    document.getElementById("paper").disabled = true;
+    document.getElementById("scissors").disabled = true;
+  }
 }
 
 /*
+// Old console-based game logic (disabled for UI version)
 function playGame() {
   humanScore = 0;
   computerScore = 0;
@@ -95,7 +94,6 @@ function playGame() {
 }
 
 playGame();
-?
 */
 
 // Button event listeners
